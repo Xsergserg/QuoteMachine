@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html> 
+	<head>
+		<title>Random Quote Machine</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	</head>
+	<style>
+		  @import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat:500&display=swap');
+		body {
+			margin: 0;
+		}
+		main {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+		}
+		#quote-box {
+			background-color: rgb(255, 255, 255);
+			max-width: 50%;
+			width: auto;
+			display: flex;
+			align-self: center;
+			justify-content: flex-start;
+			flex-direction: column;
+			padding: 25px 50px 25px 50px;
+			border-radius: 10px;
+			box-shadow: 8px 8px 3px rgb(172, 170, 170);
+		}
+		.text-style{
+			font-family: lobster;
+			font-weight: bold;
+			font-size: 25px;
+			text-align: center;
+			transition: 2s
+		}
+		.changingColor {
+			transition: 2s
+		}
+		#box_bottom {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			justify-content: space-between;
+
+		}
+		#author{
+			text-align: right;
+		}
+
+		.btn {
+			text-align: center;
+			padding: 2px 7px 3px 7px;
+			border-radius: 3px;
+			font-size: 18px;
+			color: white;
+			font-weight: bold
+		}
+
+	</style>
+	<body onload="Change()">
+		<main class="changingColor">
+			<div id="quote-box">
+				<p id="text" class="text-style">Everything you’ve ever wanted is on the other side of fear.</p>
+				<p id="author" class="text-style">Author</p>
+				<div id="box_bottom">
+					<div id="tweet-quote-box"><a id="tweet-quote" href="twitter.com/intent/tweet" class="btn changingColor">Tweet</a></div>
+					<div id="tweet-quote-box"><button type="button" id="new-quote" onclick="Change()" class="btn changingColor">New quote</button></div>
+				</div>
+			</div>
+		</main>
+		<script>
+			function Change(){
+				let quotes = [
+					["To do a great right do a little wrong.", "William Shakespeare"],
+					["All truly great thoughts are conceived by walking.", "Friedrich Nietzsche"],
+					["Whatever you want to do, if you want to be great at it, you have to love it and be able to make sacrifices for it.", 'Maya Angelou'],
+					["The greatest weapon against stress is our ability to choose one thought over another.", "William James"],
+					["The great question that has never been answered, and which I have not yet been able to answer, despite my thirty years of research into the feminine soul, is 'What does a woman want?'", "Sigmund Freud"],
+					["Great minds discuss ideas; average minds discuss events; small minds discuss people.", "Eleanor Roosevelt"],
+					["To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.", "Ralph Waldo Emerson"],
+					["he mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires.", "William Arthur Ward"],
+					["Some are born great, some achieve greatness, and some have greatness thrust upon them.", "William Shakespeare"],
+					["All the great things are simple, and many can be expressed in a single word: freedom, justice, honor, duty, mercy, hope.", "Winston Churchill"]
+				];
+				let ran = Math.floor(Math.random()*quotes.length);
+				while (document.getElementById('text').textContent == quotes[ran][0])
+					ran = Math.floor(Math.random()*quotes.length);
+				let quote = quotes[ran][0];
+				let auth = quotes[ran][1];
+				let newColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+				elem = document.getElementsByClassName("text-style");
+				for (let i = 0; i < elem.length; i++)
+					elem[i].style.color = newColor;
+				elem = document.getElementsByClassName("changingColor");
+				for (let i = 0; i < elem.length; i++)
+					elem[i].style.backgroundColor = newColor;
+				document.getElementById('text').innerHTML = quote;
+				document.getElementById('author').innerHTML = auth;
+			}
+		</script>
+		<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+	</body>
+</html>
